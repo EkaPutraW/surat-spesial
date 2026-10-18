@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔴 GANTI BAGIAN INI: Judul tab web lu -->
+    <title>Kejutan Buat Lu!</title>
+
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0b0c10; color: #ffffff; overflow-x: hidden;
+        }
+
+        #stars {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
+            animation: moveStars 50s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* --- HALAMAN 1 --- */
+        #page1 {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 100vh; text-align: center; padding: 20px; box-sizing: border-box;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .foto-grup {
+            display: flex; justify-content: center; align-items: center; gap: 30px;
+            margin-bottom: 40px; max-width: 900px; flex-wrap: wrap;
+        }
+
+        .foto-grup img {
+            width: 180px; height: 250px; object-fit: cover; border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3); border: 2px solid #45a29e;
+            transition: transform 0.3s;
+        }
+
+        .foto-grup img:hover { transform: scale(1.05); }
+
+        .teks-tengah {
+            flex: 1; min-width: 250px; max-width: 400px; font-size: 1.1rem; line-height: 1.6;
+            background: rgba(31, 40, 51, 0.7); padding: 20px; border-radius: 15px;
+            border: 1px dashed #66fcf1;
+        }
+
+        .btn-mulai {
+            background-color: #66fcf1; color: #0b0c10; padding: 15px 50px; border: none;
+            border-radius: 30px; font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            box-shadow: 0 0 15px #66fcf1; transition: all 0.3s;
+        }
+
+        .btn-mulai:hover {
+            background-color: #45a29e; color: white; box-shadow: 0 0 25px #45a29e; transform: translateY(-5px);
+        }
+
+        /* --- HALAMAN 2 --- */
+        #page2 {
+            display: none; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 40px 20px; box-sizing: border-box;
+            opacity: 0; transform: scale(0.9); transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        .layout-halaman2 {
+            display: flex; gap: 30px; max-width: 1100px; width: 100%; justify-content: center; align-items: stretch;
+        }
+
+        .kolom-foto {
+            display: flex; flex-direction: column; gap: 15px; justify-content: space-between;
+        }
+
+        .kolom-foto img {
+            width: 140px; height: 160px; object-fit: cover; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 1px solid #45a29e;
+            transition: transform 0.3s;
+        }
+        
+        .kolom-foto img:hover { transform: scale(1.1); }
+
+        .konten-tengah {
+            flex: 1; display: flex; flex-direction: column;
+            background: rgba(31, 40, 51, 0.85); padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #45a29e;
+        }
+
+        .teks-surat {
+            font-size: 1.1rem; line-height: 1.8; text-align: justify; margin-bottom: 30px; min-height: 150px;
+        }
+
+        #bawahMap {
+            opacity: 0; transition: opacity 1.5s ease-in; display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+
+        .map-container {
+            width: 100%; max-width: 400px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .btn-map {
+            display: inline-block; margin-top: 15px; background-color: #e74c3c; color: white;
+            padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: bold;
+            transition: all 0.3s; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-map:hover {
+            background-color: #c0392b; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+        }
+
+        .ucapan-makasih {
+            margin-top: 25px; font-size: 1.3rem; font-weight: bold; color: #66fcf1; text-align: center;
+        }
+
+        @media (max-width: 850px) {
+            .layout-halaman2 { flex-direction: column; align-items: center; }
+            .kolom-foto { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .kolom-foto img { width: 100px; height: 120px; }
+            .foto-grup { flex-direction: column; }
+            .teks-tengah { order: 2; margin-top: -20px; margin-bottom: 20px; }
+            .foto-grup img:first-child { order: 1; }
+            .foto-grup img:last-child { order: 3; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔴 GANTI BAGIAN INI: Nama file mp3 lagu lu -->
+    <audio id="bgMusik" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="stars"></div>
+
+    <!-- HALAMAN 1 -->
+    <div id="page1">
+        <div class="foto-grup">
+            <!-- 🔴 GANTI BAGIAN INI: Link / nama file Foto Kiri di halaman awal -->
+            <img src="foto1.jpg" alt="Foto Kiri">
+            
+            <!-- 🔴 GANTI BAGIAN INI: 3 Paragraf teks di halaman awal -->
+            <div class="teks-tengah">
+                <p>assalamualaikum</p>
+            </div>
+
+            <!-- 🔴 GANTI BAGIAN INI: Link / nama file Foto Kanan di halaman awal -->
+            <img src="foto2.jpg" alt="Foto Kanan">
+        </div>
+        
+        <!-- 🔴 GANTI BAGIAN INI: Teks tombol mulai -->
+        <button class="btn-mulai" id="btnBuka">🚀 KLICK 🚀</button>
+    </div>
+
+    <!-- HALAMAN 2 -->
+    <div id="page2">
+        <div class="layout-halaman2">
+            
+            <!-- 3 FOTO KIRI -->
+            <div class="kolom-foto">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kiri Atas -->
+                <img src="eduosmo.jpg" alt="Kiri 1">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kiri Tengah -->
+                <img src="potoo.jpg" alt="Kiri 2">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kiri Bawah -->
+                <img src="gym.jpg" alt="Kiri 3">
+            </div>
+
+            <div class="konten-tengah">
+                <div class="teks-surat" id="teksMengetik"></div>
+                
+                <div id="bawahMap">
+                    <div class="map-container">
+                        <!-- 🔴 GANTI BAGIAN INI: Teks tombol Google Maps -->
+                        <a id="linkPetaTombol" href="#" target="_blank" class="btn-map">📍 Lokasi riyan dan putra</a>
+                    </div>
+                    <div class="ucapan-makasih" id="teksMakasih">
+                        <!-- Otomatis diisi dari Javascript di bawah -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 FOTO KANAN -->
+            <div class="kolom-foto">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kanan Atas -->
+                <img src="honda-kanan.png" alt="Kanan 1">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kanan Tengah -->
+                <img src="potoo.jpg" alt="Kanan 2">
+                <!-- 🔴 GANTI BAGIAN INI: Foto Kanan Bawah -->
+                <img src="gym.jpg" alt="Kanan 3">
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // =========================================================
+        // 🔴 GANTI BAGIAN INI: SETTINGAN JAVASCRIPT
+        // TINGGAL GANTI TEKS YANG ADA DI DALEM TANDA KUTIP
+        // =========================================================
+        
+        // 🔴 GANTI BAGIAN INI: Link Shareloc Lu (Format: https://maps.app.goo.gl/...)
+        const linkSharelocLu = "https://maps.google.com/maps?q=-6.968358516693115%2C107.63633728027344&z=17&hl=id"; 
+
+        // 🔴 GANTI BAGIAN INI: Teks yang bakal ngetik otomatis (Jangan hapus tanda kutipnya)
+        const pesanLu = "Bila sekiranya sedang ada rezeki atau dana yang tersedia, terdapat beberapa kebutuhan dan tanggungan rutin yang sepertinya perlu segera diselesaikan. Pertama, ada alokasi untuk biaya servis motor. Pihak bengkel kebetulan sudah memberikan pengingat melalui pesan WhatsApp bahwa motor sudah memasuki jadwal servis rutin, agar kondisinya tetap prima dan aman saat digunakan sehari-hari. Kedua, terkait perpanjangan keanggotaan gym. Masa aktif keanggotaan untuk bulan ini sudah berakhir, sehingga perlu dilakukan pembayaran ulang apabila ingin kembali menggunakan fasilitas olahraga tersebut. Ketiga, biaya untuk melanjutkan kursus bahasa Kantonis. Mengingat periode kursus sebelumnya sudah berakhir sejak hampir satu bulan yang lalu, pembayaran ini diperlukan agar proses belajar bisa terus dilanjutkan. Bila sekiranya sedang ada rezeki atau dana yang tersedia, terdapat beberapa kebutuhan dan tanggungan rutin yang sepertinya perlu segera diselesaikan. Pertama, ada alokasi untuk biaya servis motor. Pihak bengkel kebetulan sudah memberikan pengingat melalui pesan WhatsApp bahwa motor sudah memasuki jadwal servis rutin, agar kondisinya tetap prima dan aman saat digunakan sehari-hari. Kedua, terkait perpanjangan keanggotaan gym. Masa aktif keanggotaan untuk bulan ini sudah berakhir, sehingga perlu dilakukan pembayaran ulang apabila ingin kembali menggunakan fasilitas olahraga tersebut. Ketiga, biaya untuk melanjutkan kursus bahasa Kantonis. Mengingat periode kursus sebelumnya sudah berakhir sejak hampir satu bulan yang lalu, pembayaran ini diperlukan agar proses belajar bisa terus dilanjutkan.";
+
+        // 🔴 GANTI BAGIAN INI: Nama lu buat di bagian paling bawah
+        const namaLu = "Riyan dan Putra";
+
+        // 🔴 GANTI BAGIAN INI (Opsional): Teks ucapan penutup
+        const ucapanPenutup = `Terima kasih buat semuanya<br><span style="font-size: 1rem; color: #fff;">- ${namaLu} -</span>`;
+
+        // =========================================================
+        // ⚠️ KE BAWAHNYA UDAH AMAN LEK, GAK USAH DIUBAH-UBAH LAGI ⚠️
+        // =========================================================
+
+        document.getElementById('linkPetaTombol').href = linkSharelocLu;
+        document.getElementById('teksMakasih').innerHTML = ucapanPenutup;
+
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const btnBuka = document.getElementById('btnBuka');
+        const wadahTeks = document.getElementById('teksMengetik');
+        const bawahMap = document.getElementById('bawahMap');
+        const bgMusik = document.getElementById('bgMusik');
+
+        let indexHuruf = 0;
+
+        function ngetikOtomatis() {
+            if (indexHuruf < pesanLu.length) {
+                wadahTeks.innerHTML += pesanLu.charAt(indexHuruf);
+                indexHuruf++;
+                setTimeout(ngetikOtomatis, 45); 
+            } else {
+                bawahMap.style.opacity = '1';
+            }
+        }
+
+        btnBuka.addEventListener('click', () => {
+            bgMusik.play().catch(e => console.log("Auto-play jalan"));
+
+            page1.style.opacity = '0';
+            page1.style.transform = 'translateY(-50px)';
+            
+            setTimeout(() => {
+                page1.style.display = 'none'; 
+                page2.style.display = 'flex';
+                
+                setTimeout(() => {
+                    page2.style.opacity = '1';
+                    page2.style.transform = 'scale(1)';
+                    ngetikOtomatis();
+                }, 100);
+                
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
